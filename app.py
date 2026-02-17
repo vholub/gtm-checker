@@ -6,6 +6,20 @@ import pandas as pd
 CONTAINER_ID = "GTM-PPKDLQC3"
 DEFAULT_COLUMNS = 5
 DEFAULT_EVENTS = [29, 31, 110, 127, 143]
+GA4_ECOMMERCE_EVENTS = [
+    "view_item",
+    "view_cart",
+    "add_to_cart",
+    "remove_from_cart",
+    "begin_checkout",
+    "add_shipping_info",
+    "add_payment_info",
+    "purchase",
+    "view_item_list",
+    "select_item",
+    "view_promotion",
+    "select_promotion",
+]
 
 st.set_page_config(layout="wide")
 
@@ -34,7 +48,16 @@ df = pd.DataFrame({"Event Order": indices, "Title": titles, "Event ID": unique_i
 
 st.title("Výpis událostí")
 df_filtered = df[["Event Order", "Title"]]
-st.dataframe(df_filtered, use_container_width=True)
+
+
+def highlight_ecommerce(row):
+    if row["Title"] in GA4_ECOMMERCE_EVENTS:
+        return ["background-color: #90EE90; color: #000000"] * len(row)
+    return [""] * len(row)
+
+
+styled_df = df_filtered.style.apply(highlight_ecommerce, axis=1)
+st.dataframe(styled_df, use_container_width=True)
 
 st.header("Srovnání událostí")
 num_columns = st.number_input(
