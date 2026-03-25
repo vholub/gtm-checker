@@ -5,7 +5,7 @@ import pandas as pd
 
 CONTAINER_ID = "GTM-PPKDLQC3"
 DEFAULT_COLUMNS = 5
-DEFAULT_EVENTS = [29, 31, 110, 127, 143]
+DEFAULT_EVENTS = [43, 63, 84, 90, 96]
 GA4_ECOMMERCE_EVENTS = [
     "view_item",
     "view_cart",
@@ -23,7 +23,7 @@ GA4_ECOMMERCE_EVENTS = [
 
 st.set_page_config(layout="wide")
 
-data = json.loads(pathlib.Path("tag_futrale-new.json").read_text(encoding="utf-8"))
+data = json.loads(pathlib.Path("tag_futrale_sk.json").read_text(encoding="utf-8"))
 
 containers = data.get("data", {}).get("containers", [])
 target_container = next(
