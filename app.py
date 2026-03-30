@@ -22,6 +22,9 @@ GA4_ECOMMERCE_EVENTS = [
 ]
 
 st.set_page_config(layout="wide")
+st.markdown(
+    '<style>[data-testid="stSidebarNav"]{display:none}</style>', unsafe_allow_html=True
+)
 
 data = json.loads(pathlib.Path("tag_futrale_sk.json").read_text(encoding="utf-8"))
 
